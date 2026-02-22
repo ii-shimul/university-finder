@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { University } from "@/lib/types";
+import { University } from "@/types/types";
 
 const Card = ({ university }: { university: University }) => {
 	return (
@@ -46,13 +46,13 @@ const Card = ({ university }: { university: University }) => {
 					<div className="flex justify-between">
 						<span>Tuition:</span>
 						<span className="font-semibold text-gray-800 dark:text-white">
-							${university.tuitionFee.toLocaleString()}/yr
+							${university.tuition_fee.toLocaleString()}/yr
 						</span>
 					</div>
 					<div className="flex justify-between">
 						<span>Acceptance:</span>
 						<span className="font-semibold text-gray-800 dark:text-white">
-							{university.acceptanceRate}%
+							{university.acceptance_rate}%
 						</span>
 					</div>
 				</div>
@@ -65,7 +65,7 @@ const Card = ({ university }: { university: University }) => {
 							{tag}
 						</span>
 					))}
-					{university.scholarshipAvailable && (
+					{university.scholarship_available && (
 						<span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded font-medium">
 							Scholarship
 						</span>

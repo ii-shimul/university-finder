@@ -1,11 +1,12 @@
-import { University } from "@/lib/types";
+import { University } from "@/types/types";
 import Card from "./Card";
-import universities from "@/uni.json";
+import { getUniversities } from "@/lib/queries/universities";
 
-const Grid = () => {
+const Grid = async () => {
+	const universities = (await getUniversities()) as University[];
 	return (
 		<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-			{(universities as University[]).map((uni) => (
+			{universities.map((uni) => (
 				<Card key={uni.id} university={uni} />
 			))}
 		</div>
