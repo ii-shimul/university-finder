@@ -3,8 +3,9 @@
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 
-function getInitialTheme() {
-	if (typeof window === "undefined") return false;
+// checks if the user previously chose dark mode, or if their system prefers it
+function getInitialTheme(): boolean {
+	if (typeof window === "undefined") return false; // server-side: default to light
 	const stored = localStorage.getItem("theme");
 	const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 	return stored === "dark" || (!stored && prefersDark);
@@ -21,6 +22,7 @@ const Header = () => {
 		setIsDark((prev) => {
 			const next = !prev;
 			localStorage.setItem("theme", next ? "dark" : "light");
+			document.documentElement.classList.toggle("dark", next);
 			return next;
 		});
 	}, []);
@@ -72,8 +74,8 @@ const Header = () => {
 							onClick={toggleTheme}
 						>
 							{isDark ?
-								<span className={`material-icons`}>dark_mode</span>
-							:	<span className={`material-icons`}>light_mode</span>}
+								<span className="material-icons">light_mode</span>
+							:	<span className="material-icons">dark_mode</span>}
 						</button>
 						<a
 							className="bg-secondary text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-opacity-90 transition-all shadow-md"

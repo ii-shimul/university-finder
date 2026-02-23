@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
 interface SidebarProps {
 	countries: string[];
@@ -11,6 +11,7 @@ interface SidebarProps {
 const Sidebar = ({ countries, locations }: SidebarProps) => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
+	const [isPending, startTransition] = useTransition();
 
 	// initialize state from URL params
 	const [search, setSearch] = useState(searchParams.get("search") ?? "");
@@ -49,7 +50,9 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		if (climate && climate !== "No Preference") params.set("climate", climate);
 
 		const query = params.toString();
-		router.push(query ? `/?${query}` : "/");
+		startTransition(() => {
+			router.replace(query ? `/?${query}` : "/", { scroll: false });
+		});
 	}, [
 		search,
 		country,
@@ -71,11 +74,18 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		setScholarshipAvailable(false);
 		setAcceptanceRateMax(100);
 		setClimate("No Preference");
-		router.push("/");
+		startTransition(() => {
+			router.replace("/", { scroll: false });
+		});
 	};
 
-	// auto-apply on search debounce
+	// auto-apply on search
+	const isFirstRender = useRef(true);
 	useEffect(() => {
+		if (isFirstRender.current) {
+			isFirstRender.current = false;
+			return;
+		}
 		const timeout = setTimeout(() => {
 			applyFilters();
 		}, 400);
@@ -84,7 +94,9 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 
 	return (
 		<aside className="w-full lg:w-1/4 shrink-0">
-			<div className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark sticky top-24 p-6 space-y-6">
+			<div
+				className={`bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark sticky top-24 p-6 space-y-6 transition-opacity duration-200 ${isPending ? "opacity-60 pointer-events-none" : ""}`}
+			>
 				<div className="flex justify-between items-center mb-2">
 					<h3 className="font-bold text-lg text-secondary dark:text-white flex items-center">
 						<span className="material-icons mr-2 text-primary">tune</span>{" "}
@@ -252,10 +264,11 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 
 				{/* apply button */}
 				<button
-					className="w-full bg-secondary text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition shadow cursor-pointer"
+					className="w-full bg-secondary text-white py-2.5 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition shadow cursor-pointer disabled:opacity-50"
 					onClick={applyFilters}
+					disabled={isPending}
 				>
-					Apply Filters
+					{isPending ? "Filtering..." : "Apply Filters"}
 				</button>
 			</div>
 		</aside>

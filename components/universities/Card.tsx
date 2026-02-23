@@ -19,8 +19,9 @@ const Card = ({ university }: { university: University }) => {
 				<Image
 					src={university.image}
 					alt={`${university.name} logo`}
-					unoptimized
 					fill
+					sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+					loading="lazy"
 					className="object-contain p-4"
 				/>
 			</div>
@@ -65,13 +66,14 @@ const Card = ({ university }: { university: University }) => {
 							{tag}
 						</span>
 					))}
+					<br />
 					{university.scholarship_available && (
 						<span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded font-medium">
 							Scholarship
 						</span>
 					)}
 				</div>
-				<div className="mt-5 pt-4 border-t border-gray-100 dark:border-gray-700">
+				<div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
 					<button className="w-full py-2 rounded-lg border border-secondary text-secondary dark:border-white dark:text-white hover:bg-secondary hover:text-white dark:hover:bg-white dark:hover:text-secondary text-sm font-semibold transition-colors">
 						View Details
 					</button>

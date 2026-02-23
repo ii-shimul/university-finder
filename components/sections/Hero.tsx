@@ -28,9 +28,9 @@ const Hero = () => {
 					</div>
 					<div className="relative hidden lg:block h-96 rounded-2xl overflow-hidden shadow-2xl group">
 						<Image
-							width={0}
-							height={0}
-							unoptimized
+							fill
+							sizes="50vw"
+							priority
 							alt="Students celebrating graduation"
 							className="object-cover w-full h-full transform transition duration-700 group-hover:scale-105"
 							src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEV6KCEprZ1zY2r3f7M4WzJsE-SjHhF4Kz-dQGNfOI9tQBmXVR4Y7ljvOaxjee9DalMadK-pIIykOKzDIgCeDXxE4cYKUeXf4j0AVQMbXQrDYOKVi0u08Q462F2yoZp17kv8dy4ma5PNRiengNSFlF14Yb_nAos52pUlqEhMbYIbnDJUy4oX3kOXZ5RsFTWqilMZ_g2U2pyJL46a8VEQu_zqJZAqLF5k68PM8OjTzj0nMR2z8vwssrXXsQOM0VueGa5WQV2TRlvFCR"

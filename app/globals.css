@@ -17,14 +17,3 @@
   --font-display: var(--font-inter), sans-serif;
   --radius: 0.5rem;
 }
-
-body {
-  background: var(--color-background-light);
-  color: var(--color-text-light);
-  font-family: var(--font-sans);
-}
-
-.dark body {
-  background: var(--color-background-dark);
-  color: var(--color-text-dark);
-}
