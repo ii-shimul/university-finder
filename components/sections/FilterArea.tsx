@@ -15,18 +15,18 @@ interface FilterAreaProps {
 }
 
 const FilterArea = async ({ searchParams }: FilterAreaProps) => {
-	// run independent queries in parallel
-	const [countries, locations] = await Promise.all([
-		getCountries(),
-		getLocations(searchParams.country),
-	]);
-
 	const filters: FilterParams = {
 		search: searchParams.search,
 		country: searchParams.country,
 		location: searchParams.location,
 		tuitionMax:
 			searchParams.tuitionMax ? Number(searchParams.tuitionMax) : undefined,
+		rankingMax:
+			searchParams.rankingMax ? Number(searchParams.rankingMax) : undefined,
+		establishedAfter:
+			searchParams.establishedAfter ?
+				Number(searchParams.establishedAfter)
+			:	undefined,
 		postStudyWorkVisa: searchParams.visa === "true",
 		scholarshipAvailable: searchParams.scholarship === "true",
 		acceptanceRateMax:
@@ -38,8 +38,43 @@ const FilterArea = async ({ searchParams }: FilterAreaProps) => {
 		page: searchParams.page ? Number(searchParams.page) : 1,
 	};
 
-	const { universities, total, page, totalPages } =
-		await getFilteredUniversities(filters);
+	// fetch data — if anything fails, show error UI
+	let countries: string[] = [];
+	let locations: string[] = [];
+	let universities: Awaited<ReturnType<typeof getFilteredUniversities>> | null =
+		null;
+	let error = false;
+
+	try {
+		[countries, locations] = await Promise.all([
+			getCountries(),
+			getLocations(searchParams.country),
+		]);
+		universities = await getFilteredUniversities(filters);
+	} catch {
+		error = true;
+	}
+
+	if (error || !universities) {
+		return (
+			<main className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 -mt-8 relative z-20">
+				<div className="text-center py-16">
+					<span className="material-icons text-6xl text-red-300 dark:text-red-600 mb-4 block">
+						error_outline
+					</span>
+					<h2 className="text-xl font-bold text-gray-800 dark:text-white mb-2">
+						Something went wrong
+					</h2>
+					<p className="text-gray-500 dark:text-gray-400 text-sm">
+						We couldn&apos;t load the universities. Please try refreshing the
+						page.
+					</p>
+				</div>
+			</main>
+		);
+	}
+
+	const { universities: unis, total, page, totalPages } = universities;
 
 	// build clean pagination params
 	const cleanParams: Record<string, string> = {};
@@ -66,7 +101,7 @@ const FilterArea = async ({ searchParams }: FilterAreaProps) => {
 						/>
 					</div>
 
-					<Grid universities={universities} />
+					<Grid universities={unis} />
 
 					{totalPages > 1 && (
 						<Pagination

@@ -9,9 +9,24 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-	title: "Find University - Global Education",
+	title: "University Finder – Compare & Filter Top Universities Worldwide",
 	description:
-		"Find the best universities worldwide for your education journey.",
+		"Search, filter, and compare 200+ top universities across the UK, USA, Canada, and Australia. Filter by ranking, tuition fees, scholarships, climate, and more.",
+	keywords: [
+		"university finder",
+		"study abroad",
+		"compare universities",
+		"top universities",
+		"tuition fees",
+		"scholarships",
+		"world ranking",
+	],
+	openGraph: {
+		title: "University Finder – Compare & Filter Top Universities Worldwide",
+		description:
+			"Search, filter, and compare 200+ top universities across the UK, USA, Canada, and Australia.",
+		type: "website",
+	},
 };
 
 export default function RootLayout({

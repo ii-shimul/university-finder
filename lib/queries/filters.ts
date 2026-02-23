@@ -8,6 +8,8 @@ export async function getFilteredUniversities(filters: FilterParams = {}) {
 		location,
 		tuitionMin,
 		tuitionMax,
+		rankingMax,
+		establishedAfter,
 		postStudyWorkVisa,
 		scholarshipAvailable,
 		acceptanceRateMax,
@@ -40,6 +42,16 @@ export async function getFilteredUniversities(filters: FilterParams = {}) {
 	}
 	if (tuitionMax !== undefined) {
 		query = query.lte("tuition_fee", tuitionMax);
+	}
+
+	// ranking filter (e.g. "Top 50 only")
+	if (rankingMax !== undefined) {
+		query = query.lte("ranking", rankingMax);
+	}
+
+	// established year filter (e.g. "Founded after 1900")
+	if (establishedAfter !== undefined) {
+		query = query.gte("established_year", establishedAfter);
 	}
 
 	// boolean filters

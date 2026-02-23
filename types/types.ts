@@ -8,6 +8,8 @@ export interface FilterParams {
 	location?: string;
 	tuitionMin?: number;
 	tuitionMax?: number;
+	rankingMax?: number;
+	establishedAfter?: number;
 	postStudyWorkVisa?: boolean;
 	scholarshipAvailable?: boolean;
 	acceptanceRateMax?: number;

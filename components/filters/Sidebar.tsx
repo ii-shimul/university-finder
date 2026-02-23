@@ -22,6 +22,12 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 	const [tuitionMax, setTuitionMax] = useState(
 		Number(searchParams.get("tuitionMax")) || 100000,
 	);
+	const [rankingMax, setRankingMax] = useState(
+		Number(searchParams.get("rankingMax")) || 500,
+	);
+	const [establishedAfter, setEstablishedAfter] = useState(
+		Number(searchParams.get("establishedAfter")) || 1800,
+	);
 	const [postStudyWorkVisa, setPostStudyWorkVisa] = useState(
 		searchParams.get("visa") === "true",
 	);
@@ -43,6 +49,9 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		if (location && location !== "Any Location")
 			params.set("location", location);
 		if (tuitionMax < 100000) params.set("tuitionMax", String(tuitionMax));
+		if (rankingMax < 500) params.set("rankingMax", String(rankingMax));
+		if (establishedAfter > 1800)
+			params.set("establishedAfter", String(establishedAfter));
 		if (postStudyWorkVisa) params.set("visa", "true");
 		if (scholarshipAvailable) params.set("scholarship", "true");
 		if (acceptanceRateMax < 100)
@@ -58,6 +67,8 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		country,
 		location,
 		tuitionMax,
+		rankingMax,
+		establishedAfter,
 		postStudyWorkVisa,
 		scholarshipAvailable,
 		acceptanceRateMax,
@@ -70,6 +81,8 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		setCountry("All");
 		setLocation("Any Location");
 		setTuitionMax(100000);
+		setRankingMax(500);
+		setEstablishedAfter(1800);
 		setPostStudyWorkVisa(false);
 		setScholarshipAvailable(false);
 		setAcceptanceRateMax(100);
@@ -92,10 +105,28 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 		return () => clearTimeout(timeout);
 	}, [search, applyFilters]);
 
+	const [isOpen, setIsOpen] = useState(false);
+
 	return (
 		<aside className="w-full lg:w-1/4 shrink-0">
+			{/* Mobile toggle button */}
+			<button
+				className="w-full lg:hidden flex items-center justify-between bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark p-4 mb-2 cursor-pointer"
+				onClick={() => setIsOpen(!isOpen)}
+			>
+				<span className="font-bold text-lg text-secondary dark:text-white flex items-center">
+					<span className="material-icons mr-2 text-primary">tune</span>
+					Filters
+				</span>
+				<span
+					className={`material-icons text-gray-500 transition-transform ${isOpen ? "rotate-180" : ""}`}
+				>
+					expand_more
+				</span>
+			</button>
+
 			<div
-				className={`bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark sticky top-24 p-6 space-y-6 transition-opacity duration-200 ${isPending ? "opacity-60 pointer-events-none" : ""}`}
+				className={`bg-surface-light dark:bg-surface-dark rounded-xl shadow-lg border border-border-light dark:border-border-dark sticky top-24 p-6 space-y-6 transition-all duration-200 ${isPending ? "opacity-60 pointer-events-none" : ""} ${isOpen ? "block" : "hidden"} lg:block`}
 			>
 				<div className="flex justify-between items-center mb-2">
 					<h3 className="font-bold text-lg text-secondary dark:text-white flex items-center">
@@ -192,6 +223,52 @@ const Sidebar = ({ countries, locations }: SidebarProps) => {
 					<div className="flex justify-between text-xs text-gray-400 mt-1">
 						<span>$0</span>
 						<span>$100k</span>
+					</div>
+				</div>
+
+				{/* ranking filter */}
+				<div>
+					<div className="flex justify-between text-sm mb-1">
+						<label className="font-medium text-gray-700 dark:text-gray-300">
+							World Ranking
+						</label>
+						<span className="text-primary font-bold">Top {rankingMax}</span>
+					</div>
+					<input
+						className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary"
+						max={500}
+						min={10}
+						step={10}
+						type="range"
+						value={rankingMax}
+						onChange={(e) => setRankingMax(Number(e.target.value))}
+					/>
+					<div className="flex justify-between text-xs text-gray-400 mt-1">
+						<span>Top 10</span>
+						<span>Top 500</span>
+					</div>
+				</div>
+
+				{/* established year filter */}
+				<div>
+					<div className="flex justify-between text-sm mb-1">
+						<label className="font-medium text-gray-700 dark:text-gray-300">
+							Founded After
+						</label>
+						<span className="text-primary font-bold">{establishedAfter}</span>
+					</div>
+					<input
+						className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-primary"
+						max={2000}
+						min={1800}
+						step={10}
+						type="range"
+						value={establishedAfter}
+						onChange={(e) => setEstablishedAfter(Number(e.target.value))}
+					/>
+					<div className="flex justify-between text-xs text-gray-400 mt-1">
+						<span>1800</span>
+						<span>2000</span>
 					</div>
 				</div>
 
