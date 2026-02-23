@@ -1,14 +1,30 @@
+"use client";
+
 import Image from "next/image";
 import { University } from "@/types/types";
+import { useCompare } from "@/context/CompareContext";
 
 const Card = ({ university }: { university: University }) => {
+	const { toggleCompare, isSelected, selected } = useCompare();
+	const checked = isSelected(university.id);
+
+	// disable checkbox if 2 are already selected and this one isn't one of them
+	const disabled = selected.length >= 2 && !checked;
+
 	return (
 		<div className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm hover:shadow-xl border border-border-light dark:border-border-dark transition-all duration-300 group flex flex-col relative">
 			<div className="absolute top-3 right-3 z-10">
-				<label className="flex items-center space-x-2 bg-white/90 dark:bg-black/50 backdrop-blur-sm px-2 py-1 rounded text-xs cursor-pointer border border-gray-200 dark:border-gray-700 shadow-sm">
+				<label
+					className={`flex items-center space-x-2 bg-white/90 dark:bg-black/50 backdrop-blur-sm px-2 py-1 rounded text-xs border border-gray-200 dark:border-gray-700 shadow-sm ${
+						disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"
+					}`}
+				>
 					<input
 						className="rounded text-primary focus:ring-0 w-3 h-3"
 						type="checkbox"
+						checked={checked}
+						disabled={disabled}
+						onChange={() => toggleCompare(university)}
 					/>
 					<span className="text-gray-600 dark:text-gray-300 font-medium">
 						Compare
