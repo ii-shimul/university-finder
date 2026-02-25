@@ -19,7 +19,7 @@ const Hero = () => {
 								Perfect University
 							</span>
 						</h1>
-						<p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
+						<p className="text-lg text-gray-600 dark:text-gray-200 mb-8 leading-relaxed">
 							Shabuj Global Education connects students with leading
 							universities worldwide. Discover advanced degree opportunities
 							across the UK, Canada, the USA, Australia, and more. Take the next

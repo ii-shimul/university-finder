@@ -20,11 +20,11 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 			/>
 
 			{/* Modal Content */}
-			<div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+			<div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4">
 				<div className="relative w-full max-w-5xl bg-white dark:bg-[#1a120e] rounded-xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
 					{/* Header */}
-					<div className="flex items-center justify-between px-6 py-5 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a120e] sticky top-0 z-10">
-						<h2 className="text-2xl font-bold text-secondary dark:text-white tracking-tight">
+					<div className="flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#1a120e] sticky top-0 z-10">
+						<h2 className="text-lg sm:text-2xl font-bold text-secondary dark:text-white tracking-tight">
 							Compare Universities
 						</h2>
 						<button
@@ -36,19 +36,19 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 					</div>
 
 					{/* Scrollable Content */}
-					<div className="overflow-y-auto flex-1">
-						<div className="min-w-200">
+					<div className="overflow-auto flex-1">
+						<div className="min-w-[500px] sm:min-w-[700px]">
 							{/* University Headers */}
-							<div className="grid grid-cols-[200px_1fr_1fr] bg-slate-50 dark:bg-[#23150f] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
-								<div className="p-6 flex items-end pb-4">
-									<span className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+							<div className="grid grid-cols-[120px_1fr_1fr] sm:grid-cols-[200px_1fr_1fr] bg-slate-50 dark:bg-[#23150f] border-b border-slate-200 dark:border-slate-800 sticky top-0 z-10">
+								<div className="p-3 sm:p-6 flex items-end pb-3 sm:pb-4">
+									<span className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
 										Metric
 									</span>
 								</div>
 
 								{/* University 1 Header */}
-								<div className="p-6 flex flex-col items-center gap-3 border-l border-slate-200 dark:border-slate-800">
-									<div className="w-20 h-20 rounded-full bg-white shadow-sm p-1 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700 relative">
+								<div className="p-3 sm:p-6 flex flex-col items-center gap-2 sm:gap-3 border-l border-slate-200 dark:border-slate-800">
+									<div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white shadow-sm p-1 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700 relative">
 										<Image
 											src={uni1.image}
 											alt={`${uni1.name} Logo`}
@@ -58,11 +58,11 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 										/>
 									</div>
 									<div className="text-center">
-										<h3 className="text-xl font-bold text-secondary dark:text-white leading-tight mb-1">
+										<h3 className="text-sm sm:text-xl font-bold text-secondary dark:text-white leading-tight mb-1">
 											{uni1.name}
 										</h3>
-										<div className="flex items-center justify-center gap-1 text-slate-500 dark:text-slate-400 text-sm">
-											<span className="material-icons text-[16px]">
+										<div className="flex items-center justify-center gap-1 text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+											<span className="material-icons text-[14px] sm:text-[16px]">
 												location_on
 											</span>
 											<span>
@@ -73,8 +73,8 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 								</div>
 
 								{/* University 2 Header */}
-								<div className="p-6 flex flex-col items-center gap-3 border-l border-slate-200 dark:border-slate-800">
-									<div className="w-20 h-20 rounded-full bg-white shadow-sm p-1 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700 relative">
+								<div className="p-3 sm:p-6 flex flex-col items-center gap-2 sm:gap-3 border-l border-slate-200 dark:border-slate-800">
+									<div className="w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white shadow-sm p-1 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700 relative">
 										<Image
 											src={uni2.image}
 											alt={`${uni2.name} Logo`}
@@ -84,11 +84,11 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 										/>
 									</div>
 									<div className="text-center">
-										<h3 className="text-xl font-bold text-secondary dark:text-white leading-tight mb-1">
+										<h3 className="text-sm sm:text-xl font-bold text-secondary dark:text-white leading-tight mb-1">
 											{uni2.name}
 										</h3>
-										<div className="flex items-center justify-center gap-1 text-slate-500 dark:text-slate-400 text-sm">
-											<span className="material-icons text-[16px]">
+										<div className="flex items-center justify-center gap-1 text-slate-500 dark:text-slate-400 text-xs sm:text-sm">
+											<span className="material-icons text-[14px] sm:text-[16px]">
 												location_on
 											</span>
 											<span>
@@ -101,7 +101,6 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 
 							{/* Comparison Rows */}
 							<div className="divide-y divide-slate-100 dark:divide-slate-800">
-								{/* World Ranking */}
 								<CompareRow label="World Ranking">
 									<RankBadge rank={uni1.ranking} highlight />
 									<RankBadge
@@ -110,7 +109,6 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 									/>
 								</CompareRow>
 
-								{/* Established Year */}
 								<CompareRow label="Established" striped>
 									<span className="text-slate-800 dark:text-slate-200">
 										{uni1.established_year}
@@ -120,7 +118,6 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 									</span>
 								</CompareRow>
 
-								{/* Tuition Fee */}
 								<CompareRow label="Annual Tuition">
 									<span className="text-slate-800 dark:text-slate-200 font-medium">
 										${uni1.tuition_fee.toLocaleString()}
@@ -130,37 +127,33 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 									</span>
 								</CompareRow>
 
-								{/* Acceptance Rate */}
 								<CompareRow label="Acceptance Rate" striped>
 									<AcceptanceBar rate={uni1.acceptance_rate} />
 									<AcceptanceBar rate={uni2.acceptance_rate} />
 								</CompareRow>
 
-								{/* Post-Study Work Visa */}
 								<CompareRow label="Post-Study Visa">
 									<BooleanIndicator value={uni1.post_study_work_visa} />
 									<BooleanIndicator value={uni2.post_study_work_visa} />
 								</CompareRow>
 
-								{/* Scholarship */}
 								<CompareRow label="Scholarships" striped>
 									<BooleanIndicator value={uni1.scholarship_available} />
 									<BooleanIndicator value={uni2.scholarship_available} />
 								</CompareRow>
 
-								{/* Climate */}
 								<CompareRow label="Climate">
-									<span className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-										<span className="material-icons text-blue-400">
+									<span className="flex items-center gap-1 sm:gap-2 text-slate-700 dark:text-slate-300">
+										<span className="material-icons text-blue-400 text-base sm:text-[24px]">
 											thermostat
 										</span>
-										<span className="text-sm">{uni1.climate}</span>
+										<span className="text-xs sm:text-sm">{uni1.climate}</span>
 									</span>
-									<span className="flex items-center gap-2 text-slate-700 dark:text-slate-300">
-										<span className="material-icons text-blue-400">
+									<span className="flex items-center gap-1 sm:gap-2 text-slate-700 dark:text-slate-300">
+										<span className="material-icons text-blue-400 text-base sm:text-[24px]">
 											thermostat
 										</span>
-										<span className="text-sm">{uni2.climate}</span>
+										<span className="text-xs sm:text-sm">{uni2.climate}</span>
 									</span>
 								</CompareRow>
 							</div>
@@ -168,18 +161,18 @@ const CompareModal = ({ universities, onClose }: CompareModalProps) => {
 					</div>
 
 					{/* Footer Actions */}
-					<div className="grid grid-cols-[200px_1fr_1fr] p-4 bg-white dark:bg-[#1a120e] border-t border-slate-200 dark:border-slate-800">
-						<div className="hidden md:block" />
-						<div className="px-4 border-l border-transparent md:border-slate-200 md:dark:border-slate-800">
-							<button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group cursor-pointer">
+					<div className="grid grid-cols-2 sm:grid-cols-[200px_1fr_1fr] p-3 sm:p-4 bg-white dark:bg-[#1a120e] border-t border-slate-200 dark:border-slate-800">
+						<div className="hidden sm:block" />
+						<div className="px-2 sm:px-4 sm:border-l sm:border-slate-200 sm:dark:border-slate-800">
+							<button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group cursor-pointer text-sm sm:text-base">
 								<span>Apply Now</span>
 								<span className="material-icons group-hover:translate-x-1 transition-transform text-lg">
 									arrow_forward
 								</span>
 							</button>
 						</div>
-						<div className="px-4 border-l border-transparent md:border-slate-200 md:dark:border-slate-800 mt-3 md:mt-0">
-							<button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-3 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group cursor-pointer">
+						<div className="px-2 sm:px-4 sm:border-l sm:border-slate-200 sm:dark:border-slate-800">
+							<button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2.5 sm:py-3 px-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 group cursor-pointer text-sm sm:text-base">
 								<span>Apply Now</span>
 								<span className="material-icons group-hover:translate-x-1 transition-transform text-lg">
 									arrow_forward
@@ -205,17 +198,17 @@ function CompareRow({
 }) {
 	return (
 		<div
-			className={`grid grid-cols-[200px_1fr_1fr] hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
+			className={`grid grid-cols-[120px_1fr_1fr] sm:grid-cols-[200px_1fr_1fr] hover:bg-slate-50 dark:hover:bg-white/5 transition-colors ${
 				striped ? "bg-slate-50/50 dark:bg-white/5" : ""
 			}`}
 		>
-			<div className="px-6 py-4 flex items-center text-sm font-medium text-slate-600 dark:text-slate-300">
+			<div className="px-3 sm:px-6 py-3 sm:py-4 flex items-center text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-300">
 				{label}
 			</div>
-			<div className="px-6 py-4 flex items-center justify-center border-l border-slate-100 dark:border-slate-800">
+			<div className="px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-center border-l border-slate-100 dark:border-slate-800">
 				{children[0]}
 			</div>
-			<div className="px-6 py-4 flex items-center justify-center border-l border-slate-100 dark:border-slate-800">
+			<div className="px-3 sm:px-6 py-3 sm:py-4 flex items-center justify-center border-l border-slate-100 dark:border-slate-800">
 				{children[1]}
 			</div>
 		</div>
@@ -226,7 +219,7 @@ function CompareRow({
 function RankBadge({ rank, highlight }: { rank: number; highlight?: boolean }) {
 	return (
 		<span
-			className={`inline-flex items-center px-3 py-1 rounded-full font-bold text-sm ${
+			className={`inline-flex items-center px-3 py-1 rounded-full font-bold text-xs sm:text-sm ${
 				highlight ?
 					"bg-secondary/10 text-secondary dark:text-primary dark:bg-primary/10"
 				:	"bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
@@ -262,9 +255,9 @@ function AcceptanceBar({ rate }: { rate: number }) {
 // Boolean check/cross indicator
 function BooleanIndicator({ value }: { value: boolean }) {
 	return (
-		<span className="flex items-center gap-2">
+		<span className="flex items-center gap-1 sm:gap-2">
 			<span
-				className={`material-icons ${
+				className={`material-icons text-base sm:text-[24px] ${
 					value ?
 						"text-green-600 dark:text-green-400"
 					:	"text-red-500 dark:text-red-400"
@@ -272,7 +265,7 @@ function BooleanIndicator({ value }: { value: boolean }) {
 			>
 				{value ? "check_circle" : "cancel"}
 			</span>
-			<span className="text-sm text-slate-800 dark:text-slate-200">
+			<span className="text-xs sm:text-sm text-slate-800 dark:text-slate-200">
 				{value ? "Yes" : "No"}
 			</span>
 		</span>

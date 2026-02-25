@@ -77,20 +77,20 @@ const Card = ({ university }: { university: University }) => {
 					{university.tags.map((tag) => (
 						<span
 							key={tag}
-							className="px-2 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-300 text-xs rounded font-medium"
+							className="px-2 py-1 bg-yellow-100 dark:bg-yellow-800/40 text-yellow-800 dark:text-yellow-200 text-xs rounded font-medium"
 						>
 							{tag}
 						</span>
 					))}
 					<br />
 					{university.scholarship_available && (
-						<span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 text-xs rounded font-medium">
+						<span className="px-2 py-1 bg-green-100 dark:bg-green-800/40 text-green-700 dark:text-green-200 text-xs rounded font-medium">
 							Scholarship
 						</span>
 					)}
 				</div>
 				<div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
-					<button className="w-full py-2 rounded-lg border border-secondary text-secondary dark:border-white dark:text-white hover:bg-secondary hover:text-white dark:hover:bg-white dark:hover:text-secondary text-sm font-semibold transition-colors">
+					<button className="w-full py-2 rounded-lg border border-secondary text-secondary dark:border-primary dark:text-primary hover:bg-secondary hover:text-white dark:hover:bg-primary dark:hover:text-white text-sm font-semibold transition-colors">
 						View Details
 					</button>
 				</div>

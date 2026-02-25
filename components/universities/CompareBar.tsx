@@ -15,7 +15,7 @@ const CompareBar = () => {
 	return (
 		<>
 			{/* Floating bottom bar */}
-			<div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-secondary dark:bg-gray-800 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-6 border border-white/20">
+			<div className="fixed bottom-4 sm:bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-secondary dark:bg-gray-800 text-white px-4 sm:px-6 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center gap-3 sm:gap-6 border border-white/20 max-w-[95vw]">
 				<div className="flex items-center gap-2">
 					<span className="bg-primary text-white text-xs font-bold px-2 py-0.5 rounded-full">
 						{selected.length}
